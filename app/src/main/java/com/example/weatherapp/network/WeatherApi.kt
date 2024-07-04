@@ -7,12 +7,17 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.client.request.*
 import io.ktor.client.call.*
+import kotlinx.serialization.json.Json
 
 
 object WeatherApi {
     private val client = HttpClient(CIO) {
         install(ContentNegotiation) {
-            json()
+           json(
+               Json {
+                   ignoreUnknownKeys = true
+               }
+           )
         }
     }
 
